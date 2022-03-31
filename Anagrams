@@ -1,0 +1,54 @@
+import java.util.Scanner;
+public class Anaframs 
+{
+    static char[] arrWord;
+    static int size;
+    static int count;
+    public static void main(String[] args)
+    {
+        Scanner s = new Scanner(System.in);
+        String word = s.next();
+        size = word.length();
+        arrWord = new char[size];
+        count =0;
+        for(int i =0;i<size;i++)
+            arrWord[i]=word.charAt(i);
+        doAnagram(size);
+        
+    }
+    static void doAnagram(int newSize)
+    {
+        if(newSize ==1)
+            return;
+        for(int i =0; i<newSize;i++)
+        {
+            doAnagram(newSize-1);
+            if(newSize ==2)
+                display();
+            rotate(newSize);
+        }
+    }
+    
+    static void rotate(int newSize)
+    {
+        int position = size-newSize;
+        char temp = arrWord[position];
+        for(int i = position+1;i<size;i++)
+            arrWord[i-1] = arrWord[i];
+        arrWord[size-1] = temp;
+    }
+    
+    static void display()
+    {
+        if(count<9)
+            System.out.print(" ");
+        if(count<99)
+            System.out.print(" ");
+        System.out.print(++count+" ");
+        for(int i =0;i<size;i++)
+            System.out.print(arrWord[i]);
+        if(count%6 == 0)
+        System.out.println();
+    }
+    
+}
